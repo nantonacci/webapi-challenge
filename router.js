@@ -5,7 +5,7 @@ const router = express.Router();
 
 // WORKS
 // get() project
-router.get('/', (req, res) => {
+router.get('/projects/', (req, res) => {
   Project.get()
     .then(proj => {
       res.status(200).json(proj);
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
 // WORKS
 // get() project by id
-router.get('/:id', (req, res) => {
+router.get('/projects/:id', (req, res) => {
   const id = req.params.id;
   console.log(req.params);
 
@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
 
 // WORKS
 // insert() / post new project
-router.post('/', (req, res) => {
+router.post('/projects/', (req, res) => {
   const newProj = req.body;
   const { name, description } = req.body;
 
@@ -55,7 +55,7 @@ router.post('/', (req, res) => {
 
 // WORKS
 // put / update() project
-router.put('/:id', (req, res) => {
+router.put('/projects/:id', (req, res) => {
   const id = req.params.id;
   const body = req.body;
   const { name, description } = req.body;
@@ -72,7 +72,7 @@ router.put('/:id', (req, res) => {
 
 // WORKS
 // remove() / delete project
-router.delete('/:id', (req, res) => {
+router.delete('/projects/:id', (req, res) => {
   const id = req.params.id;
 
   Project.remove(id)
@@ -86,7 +86,18 @@ router.delete('/:id', (req, res) => {
 });
 
 // get() action
+router.get('/projects/:id/actions/', (req, res) => {
+  const id = req.params.id;
 
+  Action.get()
+    .then(act => {
+      res.status(200).json(act);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: 'unable to fetch actions' });
+    });
+});
 // get() action by id
 
 // insert() / post new action, when adding an action, make sure the project_id belongs to an existing project. if you try to add an action with an id of 3 and there is no project with that id, the database will return an error
