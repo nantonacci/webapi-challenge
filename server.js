@@ -3,6 +3,6 @@ const router = require('./router.js');
 const server = express();
 
 server.use(express.json());
-server.use('/api/users', router);
+server.use('/api/', router);
 
 module.exports = server;
