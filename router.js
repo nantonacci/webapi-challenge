@@ -115,10 +115,10 @@ router.get('/projects/:id/actions/:id', (req, res) => {
     });
 });
 
-// getting 500 error
+// WORKS
 // insert() / post new action, when adding an action, make sure the project_id belongs to an existing project. if you try to add an action with an id of 3 and there is no project with that id, the database will return an error
 router.post('/projects/:id/actions/', (req, res) => {
-  const project_id = req.params.id;
+  const project_id = req.body.project_id;
   const newAction = req.body;
   const { description, notes } = req.body;
 
